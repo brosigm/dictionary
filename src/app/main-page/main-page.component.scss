@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .language-selection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    mat-form-field {
+        max-width: 30%;
+        //make the edges rounded
+        margin: 10px;
+        width: 100%; /* Input field spans full width of parent */
+      }
+
+  }
+
+  .translation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .translation-field {
+        max-width: 60%;
+        
+    }
+
+    .button {
+      margin-top: 10px;
+    }
+  }
+}

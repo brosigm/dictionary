@@ -1,0 +1,21 @@
+<p>
+  word-details works!
+</p>
+<div *ngIf="translationResult">
+    <h2>Definitions:</h2>
+    <div *ngFor="let def of translationResult.def">
+      <p><strong>{{ def.text }}</strong> - {{ def.pos }} ({{ def.ts }})</p>
+      <ul>
+        <li *ngFor="let tr of def.tr">
+          <p>{{ tr.text }} - {{ tr.pos }}</p>
+          <ul *ngIf="tr.syn && tr.syn.length > 0">
+            <li *ngFor="let syn of tr.syn">
+              {{ syn.text }} ({{ syn.pos }} - {{ syn.ts }})
+            </li>
+          </ul>
+          <p *ngIf="tr.mean && tr.mean.length > 0"><em>Meaning:</em> {{ tr.mean[0].text }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

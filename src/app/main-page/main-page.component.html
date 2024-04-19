@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="language-selection">
+    <!-- Source Language Picker -->
+    <mat-form-field>
+      <mat-label>Select Source Language</mat-label>
+      <mat-select [(ngModel)]="selectedSourceLang" (selectionChange)="onSourceLanguageChange()">
+        <mat-option *ngFor="let language of listOfKeys" [value]="language">
+          {{ language }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Destination Language Picker -->
+    <mat-form-field>
+      <mat-label>Select Destination Language</mat-label>
+      <mat-select [(ngModel)]="selectedDestinationLang" [disabled]="!selectedSourceLang"
+        (selectionChange)="onDestinationLanguageChange()">
+        <mat-option *ngFor="let language of fromToMap.get(selectedSourceLang || '') || []" [value]="language">
+          {{ language }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div class="translation">
+
+    <!-- Translation Input Field -->
+    <mat-form-field>
+      <input matInput placeholder="Enter word to translate" [(ngModel)]="wordToTranslate">
+    </mat-form-field>
+
+    <!-- Translate Button -->
+    <button mat-raised-button color="primary" (click)="onTranslate()">Translate</button>
+  </div>
+
+  <app-word-details [translationResult]="translationResult">
+  </app-word-details>
+
+
+
+  
+</div>
