@@ -8,9 +8,9 @@ import { CommonModule } from '@angular/common';
 import * as iso6391 from 'iso-639-1';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DataService } from '../shared/service/data.service';
-import { Synonym } from '../shared/dtos/synonyms';
+import { Synonym } from '../shared/model/synonyms';
 import { SynonymsDetailsComponent } from '../synonyms-details/synonyms-details.component';
+import { SynonymService } from '../shared/service/synonym.service';
 
 @Component({
   selector: 'app-synonyms-page',
@@ -36,9 +36,7 @@ export class SynonymsPageComponent {
 
   result: Synonym | undefined = undefined;
 
-
-
-  constructor(private dataService: DataService) {
+  constructor(private synonymService: SynonymService) {
   }
 
   onSelectLanguageChange() {
@@ -52,9 +50,8 @@ export class SynonymsPageComponent {
   }
 
   getSynonyms() {
-    this.dataService.get_synonyms(this.inputWord, this.selectedLanguage).then((response) => {
-      this.result = response as Synonym;
-      console.log(this.result);
+    this.synonymService.get_synonyms(this.inputWord, this.selectedLanguage).subscribe((data) => {
+      this.result = data;
     });
   }
 }

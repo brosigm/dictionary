@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Synonym } from "../dtos/synonyms";
+import { Synonym } from "../model/synonyms";
 import { Observable, catchError, retry } from "rxjs";
 
 @Injectable({

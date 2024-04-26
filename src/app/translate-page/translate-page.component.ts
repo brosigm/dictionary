@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { DataService } from '../shared/service/data.service';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { Word } from '../shared/dtos/word-properties'
+import { Word } from '../shared/model/word-properties'
 import { WordDetailsComponent } from '../word-details/word-details.component';
 import * as iso6391 from 'iso-639-1';
+import { TranslationService } from '../shared/service/translation.service';
 
 @Component({
   selector: 'app-translate-page',
@@ -36,11 +35,12 @@ export class TranslatePageComponent{
 
   translationResult: Word | null = null;
 
-  constructor(private dataService: DataService) {
+  constructor(
+    private translationService: TranslationService) {
   }
 
   ngOnInit() {
-    this.dataService.get_langs().then((data) => {
+    this.translationService.get_langs().subscribe((data) => {
       this.setLanguageMapping(data);
       this.listOfKeys = Array.from(this.fromToMap.keys());
     });
@@ -72,7 +72,7 @@ export class TranslatePageComponent{
 
   onTranslate() {
     if (this.selectedSourceLang && this.selectedDestinationLang && this.wordToTranslate) {
-      this.dataService.get_translation(this.wordToTranslate, this.selectedSourceLang, this.selectedDestinationLang).then((data) => {
+      this.translationService.get_translation(this.wordToTranslate, this.selectedSourceLang, this.selectedDestinationLang).subscribe((data) => {
         console.log(data as Word);
         this.translationResult = data as Word;
       });
@@ -81,7 +81,6 @@ export class TranslatePageComponent{
 
   shortNameToLanguage(code: string): string {
     var longName = iso6391.default.getName(code) || code;
-    /* return { code: code, name: longName }; */
     return longName;
   }
 

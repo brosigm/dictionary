@@ -1,8 +1,8 @@
 
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, catchError, retry } from "rxjs";
-import { Word } from "../dtos/word-properties";
+import { Observable, catchError, map, of, retry } from "rxjs";
+import { Word } from "../model/word-properties";
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +16,29 @@ export class TranslationService {
     constructor(private http: HttpClient) { }
 
     get_langs(): Observable<string[]> {
-        return this.http
-            .get<string[]>(this.yandexApiUrl + this.yandexApiVersion + '/dicservice.json/getLangs?key=' + this.yandexApiKey)
-            .pipe(
-                retry(this.retryNumber),
+        const cachedLangs = localStorage.getItem('cachedLangs');
+
+        if (cachedLangs) {
+            console.log('Cached languages:', JSON.parse(cachedLangs));
+            // If cached data exists, return it as an observable
+            return of(JSON.parse(cachedLangs));
+        } else {
+            console.log('No cached languages found');
+            // If no cached data, make HTTP request to fetch languages
+            return this.http.get<string[]>(
+                `${this.yandexApiUrl}${this.yandexApiVersion}/dicservice.json/getLangs?key=${this.yandexApiKey}`
+            ).pipe(
+                map((langs: string[]) => {
+                    // Store fetched data in local storage for caching
+                    localStorage.setItem('cachedLangs', JSON.stringify(langs));
+                    return langs; // Return fetched data
+                }),
+                catchError(error => {
+                    console.error('Error fetching languages:', error);
+                    throw error; // Propagate error to subscriber
+                })
             );
+        }
     }
 
     get_translation(word: string, sourceLang: string, destinationLang: string): Observable<Word> {
@@ -32,5 +50,5 @@ export class TranslationService {
     }
 
 
-    
+
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Word } from '../shared/dtos/word-properties';
+import { Word } from '../shared/model/word-properties';
 import { CommonModule } from '@angular/common';
 
 @Component({

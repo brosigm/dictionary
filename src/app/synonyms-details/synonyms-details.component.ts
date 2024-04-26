@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Synonym } from '../shared/dtos/synonyms';
-import { Word } from '../shared/dtos/word-properties';
+import { Synonym } from '../shared/model/synonyms';
+import { Word } from '../shared/model/word-properties';
 import { CommonModule } from '@angular/common';
 
 @Component({
