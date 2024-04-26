@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="navigation-options">
+        <mat-form-field appearance="fill">
+            <mat-label>Select Language</mat-label>
+            <mat-select [(ngModel)]="selectedLanguage" (selectionChange)="onSelectLanguageChange()">
+                <mat-option *ngFor="let language of languages" [value]="language">
+                    {{ getDisplayName(language) }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Translation Input Field -->
+    <mat-form-field>
+        <input matInput placeholder="Enter word to get synonyms for!" [(ngModel)]="inputWord">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="getSynonyms()">Get synonyms</button>
+</div>
+
+<app-synonyms-details [synonymsResult]="result"></app-synonyms-details>

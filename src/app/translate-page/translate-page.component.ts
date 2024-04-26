@@ -7,12 +7,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { Word, DefEntity, TrEntity, SynEntity, MeanEntity } from '../shared/dtos/word-properties'
+import { Word } from '../shared/dtos/word-properties'
 import { WordDetailsComponent } from '../word-details/word-details.component';
-
+import * as iso6391 from 'iso-639-1';
 
 @Component({
-  selector: 'app-main-page',
+  selector: 'app-translate-page',
   standalone: true,
   imports: [
      FormsModule
@@ -23,10 +23,10 @@ import { WordDetailsComponent } from '../word-details/word-details.component';
     , CommonModule
     , WordDetailsComponent
   ],
-  templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss'
+  templateUrl: './translate-page.component.html',
+  styleUrl: './translate-page.component.scss'
 })
-export class MainPageComponent{
+export class TranslatePageComponent{
   fromToMap: Map<string, string[]> = new Map<string, string[]>();
   listOfKeys: string[] = [];
 
@@ -78,4 +78,11 @@ export class MainPageComponent{
       });
     }
   }
+
+  shortNameToLanguage(code: string): string {
+    var longName = iso6391.default.getName(code) || code;
+    /* return { code: code, name: longName }; */
+    return longName;
+  }
+
 }

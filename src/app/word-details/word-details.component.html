@@ -1,21 +1,30 @@
-<p>
-  word-details works!
-</p>
-<div *ngIf="translationResult">
+<div *ngIf="translationResult" class="translation-container">
     <h2>Definitions:</h2>
-    <div *ngFor="let def of translationResult.def">
-      <p><strong>{{ def.text }}</strong> - {{ def.pos }} ({{ def.ts }})</p>
-      <ul>
-        <li *ngFor="let tr of def.tr">
-          <p>{{ tr.text }} - {{ tr.pos }}</p>
-          <ul *ngIf="tr.syn && tr.syn.length > 0">
-            <li *ngFor="let syn of tr.syn">
-              {{ syn.text }} ({{ syn.pos }} - {{ syn.ts }})
+    <p *ngIf="translationResult.def?.length == 0"> <strong>No definitions</strong></p>
+    <div *ngFor="let def of translationResult.def" class="category-title">
+        <p><strong>{{ def.text }}</strong> - {{ def.pos }} ({{ def.ts }})</p>
+        <ul>
+            <li *ngFor="let tr of def.tr">
+                <p><strong>{{ tr.text }}</strong> - {{ tr.pos }} ({{ tr.ts }})</p>
+                <p><strong>Synonyms:</strong></p>
+                <ul *ngIf="!tr.syn || (tr.syn && tr.syn.length == 0)">
+                    <li><strong>No synonyms found</strong></li>
+                </ul>
+                <ul *ngIf="tr.syn && tr.syn.length > 0">
+                    <li *ngFor="let syn of tr.syn">
+                        {{ syn.text }} ({{ syn.pos }} - {{ syn.ts }}) {{ syn.gen }} {{ syn.fr }}
+                    </li>
+                </ul>
+                <p><strong>Meaning:</strong></p>
+                <p *ngIf="!tr.mean || (tr.mean && tr.mean.length == 0)">
+                    <li><strong>No meaning found</strong></li>
+                </p>
+                <ul *ngIf="tr.mean && tr.mean.length > 0">
+                    <li *ngFor = "let mean of tr.mean">
+                        {{ mean.text }}
+                    </li>
+                </ul>
             </li>
-          </ul>
-          <p *ngIf="tr.mean && tr.mean.length > 0"><em>Meaning:</em> {{ tr.mean[0].text }}</p>
-        </li>
-      </ul>
+        </ul>
     </div>
-  </div>
-  
+</div>

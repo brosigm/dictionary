@@ -1,0 +1,25 @@
+/* Style the container for the synonyms section */
+.synonyms-container {
+    padding-left: 20px; /* Add left padding to the container */
+  }
+  
+  /* Style the category title */
+  .category-title {
+    margin-bottom: 5px; /* Add bottom margin below the category title */
+  }
+  
+  /* Style the synonym list */
+  .synonym-list {
+    margin-bottom: 10px; /* Add bottom margin below each synonym list */
+  }
+  
+  /* Style the synonym items within the list */
+  .synonym-item {
+    display: inline; /* Display synonyms inline */
+  }
+  
+  /* Add comma separator after each synonym item except the last one */
+  .synonym-item:not(:last-child)::after {
+    content: ", "; /* Display comma and space after each synonym item */
+  }
+  

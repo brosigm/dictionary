@@ -1,0 +1,15 @@
+<div *ngIf="synonymsResult" class="synonyms-container">
+    <h2>Synonyms:</h2>
+    <!-- Iterate over each synonym category -->
+    <div *ngFor="let syn of synonymsResult.response" class="category-title">
+        <strong>{{ syn.list.category }}</strong>
+        <!-- Iterate over each synonym in the category -->
+        <ng-container *ngFor="let synItem of splitSynonyms(syn.list.synonyms); let last = last">
+            <!-- Display the synonym item -->
+            {{ synItem }}
+            <!-- Display a comma if it's not the last item -->
+            <span *ngIf="!last">, </span>
+        </ng-container>
+
+    </div>
+</div>

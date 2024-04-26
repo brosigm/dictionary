@@ -1,0 +1,12 @@
+/* Styles for the welcome text */
+.welcome-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  /* Styles for paragraphs within the card content */
+  mat-card-content p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }

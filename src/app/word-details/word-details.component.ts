@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class WordDetailsComponent {
   @Input() translationResult: Word | null = null;
-  @Input() sourceLang: string | undefined;
-  @Input() destinationLang: string | undefined;
 
 
 }

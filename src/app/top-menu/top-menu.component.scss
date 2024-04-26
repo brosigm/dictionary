@@ -1,0 +1,21 @@
+/* Reset default link styles */
+a.menu-item {
+    color: inherit; /* Inherit color from parent (usually theme color) */
+    text-decoration: none; /* Remove underline */
+    padding: 0 15px; /* Add padding to each menu item */
+  }
+  
+  /* Positioning and styling of navigation options */
+  .navigation-options {
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    height: 100%; /* Ensure full height of the toolbar */
+    margin-right: auto; /* Push items to the left by pushing margin to right */
+  }
+  
+  /* Optional: Adjust toolbar style for your preference */
+  mat-toolbar {
+    height: 5% /* Customize toolbar height as needed */
+  }
+  

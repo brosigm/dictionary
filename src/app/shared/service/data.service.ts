@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { Word, DefEntity, TrEntity, SynEntity, MeanEntity } from '../dtos/word-properties';
 
 @Injectable({
   providedIn: 'root'
@@ -9,18 +8,16 @@ export class DataService {
 
   constructor() { }
 
-  apiUrl = 'https://dictionary.yandex.net/api/';
-  apiVersion = 'v1';
-  apiKey = "dict.1.1.20240411T204819Z.4aa2d9189b636b73.ee12b7885ac0450d1c29841003149bc680902c18"; //should be added to query string
-  httpOptions = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-
+  yandexApiUrl = 'https://dictionary.yandex.net/api/';
+  yandexApiVersion = 'v1';
+  yandexApiKey = "dict.1.1.20240411T204819Z.4aa2d9189b636b73.ee12b7885ac0450d1c29841003149bc680902c18"; //should be added to query string
+  
+  thesaurusApiUrl = 'http://thesaurus.altervista.org/thesaurus/';
+  thesaurusApiVersion = 'v1';
+  thesaurusApiKey = "sDNVshR7Rkt3AQopJbdI";
+  
   async get_langs(): Promise<any>{
-    return fetch(this.apiUrl + this.apiVersion + '/dicservice.json/getLangs?key=' + this.apiKey)
+    return fetch(this.yandexApiUrl + this.yandexApiVersion + '/dicservice.json/getLangs?key=' + this.yandexApiKey)
     .then(
       (response) => {
         if(response.ok){
@@ -33,8 +30,20 @@ export class DataService {
   }
 
   async get_translation(word: string, sourceLang: string, destinationLang: string): Promise<any>{
-    console.log(this.apiUrl + this.apiVersion + '/dicservice.json/lookup?key=' + this.apiKey + '&lang=' + sourceLang + '-' + destinationLang + '&text=' + word);
-    return fetch(this.apiUrl + this.apiVersion + '/dicservice.json/lookup?key=' + this.apiKey + '&lang=' + sourceLang + '-' + destinationLang + '&text=' + word)
+    return fetch(this.yandexApiUrl + this.yandexApiVersion + '/dicservice.json/lookup?key=' + this.yandexApiKey + '&lang=' + sourceLang + '-' + destinationLang + '&text=' + word)
+    .then(
+      (response) => {
+        if(response.ok){
+          return response.json();
+        }
+        return this.handleError(response);
+      }).catch((error) => {
+        return this.handleError(error);
+      });
+  }
+
+  async get_synonyms(word: string, lang: string): Promise<any>{
+    return fetch(this.thesaurusApiUrl + this.thesaurusApiVersion +'?word=' + word + '&language=' + lang + '&key=' + this.thesaurusApiKey + '&output=json')
     .then(
       (response) => {
         if(response.ok){
@@ -58,7 +67,5 @@ export class DataService {
       return errorMessage;
     });
   }
-
-
   
 }

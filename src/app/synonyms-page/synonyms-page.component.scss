@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px; /* Add padding around the container */
+
+    .button {
+      margin-top: 10px; /* Add space above the button */
+      width: 150px; /* Set a fixed width for the button */
+    }
+  }

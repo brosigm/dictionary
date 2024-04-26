@@ -5,7 +5,7 @@
       <mat-label>Select Source Language</mat-label>
       <mat-select [(ngModel)]="selectedSourceLang" (selectionChange)="onSourceLanguageChange()">
         <mat-option *ngFor="let language of listOfKeys" [value]="language">
-          {{ language }}
+          {{ shortNameToLanguage(language) }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -16,7 +16,7 @@
       <mat-select [(ngModel)]="selectedDestinationLang" [disabled]="!selectedSourceLang"
         (selectionChange)="onDestinationLanguageChange()">
         <mat-option *ngFor="let language of fromToMap.get(selectedSourceLang || '') || []" [value]="language">
-          {{ language }}
+          {{ shortNameToLanguage(language) }}
         </mat-option>
       </mat-select>
     </mat-form-field>
