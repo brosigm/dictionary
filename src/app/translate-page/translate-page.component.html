@@ -31,13 +31,10 @@
     </mat-form-field>
 
     <!-- Translate Button -->
-    <button mat-raised-button color="primary" (click)="onTranslate()">Translate</button>
+    <button mat-raised-button color="primary" (click)="onTranslate()"
+      [disabled]="!selectedSourceLang || !selectedDestinationLang || wordToTranslate == ''">Translate</button>
   </div>
 
   <app-word-details [translationResult]="translationResult">
   </app-word-details>
-
-
-
-  
 </div>

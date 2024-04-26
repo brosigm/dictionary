@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-welcome-page',
@@ -11,5 +11,4 @@ import {MatCardModule} from '@angular/material/card';
   styleUrl: './welcome-page.component.scss'
 })
 export class WelcomePageComponent {
-
 }

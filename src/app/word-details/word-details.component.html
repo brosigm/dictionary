@@ -17,13 +17,13 @@
                 </ul>
                 <p><strong>Meaning:</strong></p>
                 <p *ngIf="!tr.mean || (tr.mean && tr.mean.length == 0)">
-                    <li><strong>No meaning found</strong></li>
-                </p>
-                <ul *ngIf="tr.mean && tr.mean.length > 0">
-                    <li *ngFor = "let mean of tr.mean">
-                        {{ mean.text }}
-                    </li>
-                </ul>
+            <li><strong>No meaning found</strong></li>
+            </p>
+            <ul *ngIf="tr.mean && tr.mean.length > 0">
+                <li *ngFor="let mean of tr.mean">
+                    {{ mean.text }}
+                </li>
+            </ul>
             </li>
         </ul>
     </div>

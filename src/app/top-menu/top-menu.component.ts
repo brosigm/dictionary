@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarRow } from '@angular/material/toolbar';
 
@@ -27,14 +27,4 @@ import { MatToolbarRow } from '@angular/material/toolbar';
   templateUrl: './top-menu.component.html',
   styleUrl: './top-menu.component.scss'
 })
-export class TopMenuComponent {
-  sidenavOpened = false;
-
-  toggleSidenav(): void {
-    this.sidenavOpened = !this.sidenavOpened;
-  }
-
-  closeSidenav(): void {
-    this.sidenavOpened = false;
-  }
-}
+export class TopMenuComponent { }
